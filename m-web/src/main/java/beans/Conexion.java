@@ -27,19 +27,19 @@ public class Conexion {
 		DB_driver = "com.mysql.jdbc.Driver";
 	
 		//local
-		url = "jdbc:mysql://localhost:3306/produccion_multiemergencias";
-		username = "root";
-		password = "12345678";
+//		url = "jdbc:mysql://localhost:3306/produccion_multiemergencias";
+//		username = "root";
+//		password = "12345678";
 		
 		//openshift v2
 //		url = "jdbc:mysql://127.2.5.2:3306/multiemergencias";
 //		username = "adminu82AwDA";
 //		password = "iYula1mwC8BU";
 		
-		//openshift v3
-//		url = "jdbc:mysql://mysql:3306/produccion_multiemergencias";
-//		username = "dannypipe_multiemergencias";
-//		password = "meli0523_multiemergencias";
+		//openshift v3 
+		url = "jdbc:mysql://mysql:3306/produccion_multiemergencias";
+		username = "dannypipe_multiemergencias";
+		password = "meli0523_multiemergencias";
 		
 		
 
