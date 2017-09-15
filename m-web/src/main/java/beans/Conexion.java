@@ -30,7 +30,7 @@ public class Conexion {
 //		url = "jdbc:mysql://localhost:3306/produccion_multiemergencias";
 //		username = "root";
 //		password = "12345678";
-		
+//		
 		//openshift v2
 //		url = "jdbc:mysql://127.2.5.2:3306/multiemergencias";
 //		username = "adminu82AwDA";
