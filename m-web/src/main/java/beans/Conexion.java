@@ -36,6 +36,7 @@ public class Conexion {
 //		username = "adminu82AwDA";
 //		password = "iYula1mwC8BU";
 		
+		
 		//openshift v3 
 		url = "jdbc:mysql://mysql:3306/produccion_multiemergencias";
 		username = "dannypipe_multiemergencias";
