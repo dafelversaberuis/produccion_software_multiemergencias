@@ -105,23 +105,25 @@
 				//linea de bytes lo siguiente: new JREmptyDataSource()
 
 				byte[] bytes = JasperRunManager.runReportToPdf(ruta_servidor_plantilla + "/" + reporte, pars, new JREmptyDataSource());
+				
+				bAdministrarPublicaciones.imprimir(bytes);
 
 				/*Indicamos que la respuesta va a ser en formato PDF*/
 
-				response.setContentType("application/pdf");
-				response.setContentLength(bytes.length);
-				ServletOutputStream ouputStream = response.getOutputStream();
-				try{
-				ouputStream.write(bytes, 0, bytes.length);
-				}catch(Exception ee){
+				//response.setContentType("application/pdf");
+				//response.setContentLength(bytes.length);
+				//ServletOutputStream ouputStream = response.getOutputStream();
+				//try{
+				//ouputStream.write(bytes, 0, bytes.length);
+				//}catch(Exception ee){
 					
-				}
+				//}
 
 				/*Limpiamos y cerramos flujos de salida*/
 
-				ouputStream.flush();
-				ouputStream.close();
-				return;
+				//ouputStream.flush();
+				//ouputStream.close();
+				//return;
 
 			} else {
 

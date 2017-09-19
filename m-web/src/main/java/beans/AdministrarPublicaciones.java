@@ -1,6 +1,9 @@
 package beans;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -9,16 +12,14 @@ import java.util.Date;
 import java.util.List;
 
 public class AdministrarPublicaciones {
-	
-	
+
 	public int eliminarCurso(String idAdministrador) {
 		Conexion conexion = new Conexion();
 		conexion.setAutoCommitBD(true);
 		int g = 0;
 		boolean actualizo = false;
 
-		actualizo = conexion.actualizarBD("DELETE FROM tipo_certificacion WHERE id="
-				+ Integer.parseInt(idAdministrador));
+		actualizo = conexion.actualizarBD("DELETE FROM tipo_certificacion WHERE id=" + Integer.parseInt(idAdministrador));
 
 		conexion.cerrarConexion();
 		if (actualizo) {
@@ -26,16 +27,13 @@ public class AdministrarPublicaciones {
 		}
 		return g;
 	}
-	
-	
+
 	public int editarCurso(String id, String curso, String proyecto) {
 		Conexion conexion = new Conexion();
 		int exito = 0;
 		try {
 
-			boolean actualizo = conexion
-					.actualizarBD("UPDATE tipo_certificacion SET nombre_certificacion='" + curso.trim()
-							+ "' WHERE id=" + id);
+			boolean actualizo = conexion.actualizarBD("UPDATE tipo_certificacion SET nombre_certificacion='" + curso.trim() + "' WHERE id=" + id);
 			if (actualizo) {
 				exito = 1;
 			}
@@ -55,9 +53,7 @@ public class AdministrarPublicaciones {
 		int exito = 0;
 		try {
 
-			boolean actualizo = conexion
-					.actualizarBD("INSERT INTO tipo_certificacion(nombre_certificacion) VALUES('"
-							+ curso.trim() + "')");
+			boolean actualizo = conexion.actualizarBD("INSERT INTO tipo_certificacion(nombre_certificacion) VALUES('" + curso.trim() + "')");
 			if (actualizo) {
 				exito = 1;
 			}
@@ -71,14 +67,12 @@ public class AdministrarPublicaciones {
 		return exito;
 
 	}
-	
-	
+
 	public List<Object[]> getCursos() {
 
 		List<Object[]> cursos = new ArrayList<Object[]>();
 		Conexion conexion = new Conexion();
-		String sentencia = "   SELECT * FROM tipo_certificacion a"
-				+ " ORDER BY a.nombre_certificacion";
+		String sentencia = "   SELECT * FROM tipo_certificacion a" + " ORDER BY a.nombre_certificacion";
 		Object[] curso = null;
 		ResultSet rs = conexion.consultarBD(sentencia);
 		try {
@@ -87,7 +81,6 @@ public class AdministrarPublicaciones {
 
 				curso[0] = rs.getObject(1);
 				curso[1] = rs.getObject(2);
-				
 
 				cursos.add(curso);
 			}
@@ -99,15 +92,11 @@ public class AdministrarPublicaciones {
 		}
 		return cursos;
 	}
-	
-	
+
 	public Object[] getCursoCompleto(String id) {
 
 		Conexion conexion = new Conexion();
-		String sentencia = "   SELECT *  FROM tipo_certificacion a"
-				+ " WHERE a.id="
-				+ id
-				+ " ORDER BY a.nombre_certificacion";
+		String sentencia = "   SELECT *  FROM tipo_certificacion a" + " WHERE a.id=" + id + " ORDER BY a.nombre_certificacion";
 		Object[] curso = null;
 		ResultSet rs = conexion.consultarBD(sentencia);
 		try {
@@ -116,7 +105,6 @@ public class AdministrarPublicaciones {
 
 				curso[0] = rs.getObject(1);
 				curso[1] = rs.getObject(2);
-				
 
 			}
 			rs.close();
@@ -127,11 +115,6 @@ public class AdministrarPublicaciones {
 		}
 		return curso;
 	}
-	
-	
-	
-	
-	
 
 	public int contactar(String correo, String nombre, String telefono, String contenido) {
 
@@ -360,16 +343,14 @@ public class AdministrarPublicaciones {
 		}
 		return g;
 	}
-	
-	
+
 	public int eliminarCertificado(String id) {
 		Conexion conexion = new Conexion();
 		conexion.setAutoCommitBD(true);
 		int g = 0;
 		boolean actualizo = false;
 
-	   actualizo = conexion.actualizarBD("DELETE FROM certificados WHERE id_certificado=" + Integer.parseInt(id));
-	
+		actualizo = conexion.actualizarBD("DELETE FROM certificados WHERE id_certificado=" + Integer.parseInt(id));
 
 		conexion.cerrarConexion();
 		if (actualizo) {
@@ -401,7 +382,7 @@ public class AdministrarPublicaciones {
 
 		String sentencia = "";
 
-		sentencia = "SELECT rf.fecha_publicacion, rf.direccion_foto, (eg.primer_nombre||' '|| eg.segundo_nombre|| ' '|| eg.primer_apellido|| ' '|| eg.segundo_apellido) AS nombre, id_foto FROM repositorio_fotos rf, egresados eg WHERE rf.id_egresado = eg.id_egresado" + " UNION ALL" + " SELECT rf.fecha_publicacion, rf.direccion_foto, 'ADMINISTRADOR' AS nombre, id_foto FROM repositorio_fotos rf WHERE rf.id_administrador IS NOT NULL AND id_egresado IS NULL";
+		sentencia = "SELECT rf.fecha_publicacion, rf.direccion_foto, (eg.primer_nombre||' '|| eg.segundo_nombre|| ' '|| eg.primer_apellido|| ' '|| eg.segundo_apellido) AS nombre, id_foto, archivo, content_type, id_foto FROM repositorio_fotos rf, egresados eg WHERE rf.id_egresado = eg.id_egresado" + " UNION ALL" + " SELECT rf.fecha_publicacion, rf.direccion_foto, 'ADMINISTRADOR' AS nombre, id_foto, archivo, content_type, id_foto FROM repositorio_fotos rf WHERE rf.id_administrador IS NOT NULL AND id_egresado IS NULL";
 
 		RepositorioFotos foto2 = null;
 		ResultSet rs = conexion.consultarBD(sentencia);
@@ -413,7 +394,9 @@ public class AdministrarPublicaciones {
 				foto2.setNombre(rs.getString(3));
 				foto2.setFechaPublicacion(rs.getString(1));
 				foto2.setDireccionFoto(rs.getString(2));
-
+				foto2.setArchivo(rs.getBytes(5));
+				foto2.setContentType(rs.getString(6));
+				foto2.setIdFoto(rs.getInt(7));
 				fotos.add(foto2);
 			}
 			rs.close();
@@ -467,9 +450,9 @@ public class AdministrarPublicaciones {
 		Conexion conexion = new Conexion();
 		String sentencia = "";
 		if (tipoUsuario.equals("1")) {
-			sentencia = "SELECT rf.fecha_publicacion, rf.direccion_foto, (eg.primer_nombre||' '|| eg.segundo_nombre|| ' '|| eg.primer_apellido|| ' '|| eg.segundo_apellido) AS nombre, id_foto FROM repositorio_fotos rf, egresados eg WHERE rf.id_egresado = eg.id_egresado AND eg.id_egresado=" + usuario;
+			sentencia = "SELECT rf.fecha_publicacion, rf.direccion_foto, (eg.primer_nombre||' '|| eg.segundo_nombre|| ' '|| eg.primer_apellido|| ' '|| eg.segundo_apellido) AS nombre, id_foto, archivo, content_type, id_foto FROM repositorio_fotos rf, egresados eg WHERE rf.id_egresado = eg.id_egresado AND eg.id_egresado=" + usuario;
 		} else {
-			sentencia = "SELECT rf.fecha_publicacion, rf.direccion_foto, (eg.primer_nombre||' '|| eg.segundo_nombre|| ' '|| eg.primer_apellido|| ' '|| eg.segundo_apellido) AS nombre, id_foto FROM repositorio_fotos rf, egresados eg WHERE rf.id_egresado = eg.id_egresado" + " UNION ALL" + " SELECT rf.fecha_publicacion, rf.direccion_foto, 'ADMINISTRADOR' AS nombre, id_foto FROM repositorio_fotos rf WHERE rf.id_administrador IS NOT NULL AND id_egresado IS NULL";
+			sentencia = "SELECT rf.fecha_publicacion, rf.direccion_foto, (eg.primer_nombre||' '|| eg.segundo_nombre|| ' '|| eg.primer_apellido|| ' '|| eg.segundo_apellido) AS nombre, id_foto, archivo, content_type, id_foto FROM repositorio_fotos rf, egresados eg WHERE rf.id_egresado = eg.id_egresado" + " UNION ALL" + " SELECT rf.fecha_publicacion, rf.direccion_foto, 'ADMINISTRADOR' AS nombre, id_foto, archivo, content_type, id_foto FROM repositorio_fotos rf WHERE rf.id_administrador IS NOT NULL AND id_egresado IS NULL";
 		}
 		RepositorioFotos foto = null;
 		ResultSet rs = conexion.consultarBD(sentencia);
@@ -481,6 +464,9 @@ public class AdministrarPublicaciones {
 				foto.setNombre(rs.getString(3));
 				foto.setFechaPublicacion(rs.getString(1));
 				foto.setDireccionFoto(rs.getString(2));
+				foto.setArchivo(rs.getBytes(5));
+				foto.setContentType(rs.getString(6));
+				foto.setIdFoto(rs.getInt(7));
 				fotos.add(foto);
 			}
 			rs.close();
@@ -491,11 +477,41 @@ public class AdministrarPublicaciones {
 		}
 		return fotos;
 	}
+	
+	
+	public RepositorioFotos getRepositorioFoto(Integer aId) {
+
+		Conexion conexion = new Conexion();
+		String sentencia = "SELECT rf.fecha_publicacion, rf.direccion_foto, (eg.primer_nombre||' '|| eg.segundo_nombre|| ' '|| eg.primer_apellido|| ' '|| eg.segundo_apellido) AS nombre, archivo, content_type, id_foto FROM repositorio_fotos rf, egresados eg WHERE rf.id_egresado = eg.id_egresado AND rf.id_foto="+aId + " UNION ALL" + " SELECT rf.fecha_publicacion, rf.direccion_foto, 'ADMINISTRADOR' AS nombre, archivo, content_type, id_foto FROM repositorio_fotos rf WHERE rf.id_administrador IS NOT NULL AND id_egresado IS NULL  AND rf.id_foto="+aId;
+		RepositorioFotos foto = null;
+		ResultSet rs = conexion.consultarBD(sentencia);
+		int c = 0;
+		try {
+			if (rs.next()) {
+				foto = new RepositorioFotos();
+				foto.setNombre(rs.getString(3));
+				foto.setFechaPublicacion(rs.getString(1));
+				foto.setDireccionFoto(rs.getString(2));
+				foto.setArchivo(rs.getBytes(4));
+				foto.setContentType(rs.getString(5));
+				foto.setIdFoto(rs.getInt(6));
+			
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// e.printStackTrace();
+		} finally {
+			conexion.cerrarConexion();
+		}
+		return foto;
+	}
+	
+	
 
 	public List<RepositorioFotos> getRepositorioFotos() {
 		List<RepositorioFotos> fotos = new ArrayList<RepositorioFotos>();
 		Conexion conexion = new Conexion();
-		String sentencia = "SELECT rf.fecha_publicacion, rf.direccion_foto, (eg.primer_nombre||' '|| eg.segundo_nombre|| ' '|| eg.primer_apellido|| ' '|| eg.segundo_apellido) AS nombre FROM repositorio_fotos rf, egresados eg WHERE rf.id_egresado = eg.id_egresado" + " UNION ALL" + " SELECT rf.fecha_publicacion, rf.direccion_foto, 'ADMINISTRADOR' AS nombre FROM repositorio_fotos rf WHERE rf.id_administrador IS NOT NULL AND id_egresado IS NULL";
+		String sentencia = "SELECT rf.fecha_publicacion, rf.direccion_foto, (eg.primer_nombre||' '|| eg.segundo_nombre|| ' '|| eg.primer_apellido|| ' '|| eg.segundo_apellido) AS nombre, archivo, content_type, id_foto FROM repositorio_fotos rf, egresados eg WHERE rf.id_egresado = eg.id_egresado" + " UNION ALL" + " SELECT rf.fecha_publicacion, rf.direccion_foto, 'ADMINISTRADOR' AS nombre, archivo, content_type, id_foto FROM repositorio_fotos rf WHERE rf.id_administrador IS NOT NULL AND id_egresado IS NULL";
 		RepositorioFotos foto = null;
 		ResultSet rs = conexion.consultarBD(sentencia);
 		int c = 0;
@@ -505,6 +521,9 @@ public class AdministrarPublicaciones {
 				foto.setNombre(rs.getString(3));
 				foto.setFechaPublicacion(rs.getString(1));
 				foto.setDireccionFoto(rs.getString(2));
+				foto.setArchivo(rs.getBytes(4));
+				foto.setContentType(rs.getString(5));
+				foto.setIdFoto(rs.getInt(6));
 				fotos.add(foto);
 			}
 			rs.close();
@@ -530,23 +549,98 @@ public class AdministrarPublicaciones {
 
 	}
 
-	public int guardarRepositorio(String tipoEgresado, String usuario, String foto) {
+	public void actualizarArchivo(File archivo) {
+
+		Conexion conexion2 = new Conexion();
+		String sentencia = "SELECT MAX(id_foto) FROM repositorio_fotos";
+		int id = 0;
+
+		ResultSet rs2 = conexion2.consultarBD(sentencia);
+
+		try {
+			if (rs2.next()) {
+				id = rs2.getInt(1);
+			}
+			rs2.close();
+
+		} catch (SQLException e) {
+			// e.printStackTrace();
+		} finally {
+			conexion2.cerrarConexion();
+		}
+
+		Conexion conexion = new Conexion();
+		byte[] array = null;
+
+		// try {
+		// array = Files.readAllBytes(archivo.toPath());
+		// } catch (Exception e) {
+		// array = null;
+		// }
+
+		try {
+			FileInputStream is = new FileInputStream(archivo);
+
+			// guarda el archivo
+
+			String[][] condiciones = new String[1][2];
+			condiciones[0][0] = "id_foto";
+			condiciones[0][1] = "" + id;
+			String[] campos = new String[1];
+			campos[0] = "archivo";
+			Object[] valores = new Object[1];
+			valores[0] = array;
+			boolean oka = conexion.actualizarBD3("repositorio_fotos", campos, condiciones, is, (int) archivo.length(), archivo);
+			// revisa
+			System.out.println(oka);
+
+			conexion.cerrarConexion();
+
+		} catch (Exception e) {
+
+		}
+
+	}
+
+	public void guardarArchivoDisco(String directorio_ruta_con_nombre_archivo, byte[] array) {
+
+		if (array != null) {
+			FileOutputStream fileOuputStream = null;
+			try {
+				fileOuputStream = new FileOutputStream(directorio_ruta_con_nombre_archivo);
+				fileOuputStream.write(array);
+			} catch (Exception e) {
+
+			} finally {
+				try {
+					fileOuputStream.close();
+				} catch (IOException e) {
+
+				}
+			}
+		}
+
+	}
+
+	public int guardarRepositorio(String tipoEgresado, String usuario, String foto, String contentType) {
+
 		Conexion conexion = new Conexion();
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 		int g = 0;
 		boolean actualizo = false;
 
-		actualizo = conexion.actualizarBD("INSERT INTO repositorio_fotos(direccion_foto, id_administrador, fecha_publicacion) VALUES('" + foto + "',1,'" + formato.format(new Date()) + "')");
+		actualizo = conexion.actualizarBD("INSERT INTO repositorio_fotos(direccion_foto, id_administrador, fecha_publicacion, content_type) VALUES('" + foto + "',1,'" + formato.format(new Date()) + "','"+contentType+"')");
 
 		if (actualizo) {
 			g = 1;
+
 		}
 
 		List<RepositorioFotos> fotos = new ArrayList<RepositorioFotos>();
 
 		String sentencia = "";
 
-		sentencia = "SELECT rf.fecha_publicacion, rf.direccion_foto, (eg.primer_nombre||' '|| eg.segundo_nombre|| ' '|| eg.primer_apellido|| ' '|| eg.segundo_apellido) AS nombre, id_foto FROM repositorio_fotos rf, egresados eg WHERE rf.id_egresado = eg.id_egresado" + " UNION ALL" + " SELECT rf.fecha_publicacion, rf.direccion_foto, 'ADMINISTRADOR' AS nombre, id_foto FROM repositorio_fotos rf WHERE rf.id_administrador IS NOT NULL AND id_egresado IS NULL";
+		sentencia = "SELECT rf.fecha_publicacion, rf.direccion_foto, (eg.primer_nombre||' '|| eg.segundo_nombre|| ' '|| eg.primer_apellido|| ' '|| eg.segundo_apellido) AS nombre, id_foto, archivo, content_type, id_foto FROM repositorio_fotos rf, egresados eg WHERE rf.id_egresado = eg.id_egresado" + " UNION ALL" + " SELECT rf.fecha_publicacion, rf.direccion_foto, 'ADMINISTRADOR' AS nombre, id_foto, archivo, content_type, id_foto FROM repositorio_fotos rf WHERE rf.id_administrador IS NOT NULL AND id_egresado IS NULL";
 
 		RepositorioFotos foto2 = null;
 		ResultSet rs = conexion.consultarBD(sentencia);
@@ -558,9 +652,13 @@ public class AdministrarPublicaciones {
 				foto2.setNombre(rs.getString(3));
 				foto2.setFechaPublicacion(rs.getString(1));
 				foto2.setDireccionFoto(rs.getString(2));
+				foto2.setArchivo(rs.getBytes(5));
+				foto2.setContentType(rs.getString(6));
+				foto2.setIdFoto(rs.getInt(7));
 				fotos.add(foto2);
 			}
 			rs.close();
+
 		} catch (SQLException e) {
 			// e.printStackTrace();
 		} finally {
@@ -574,6 +672,7 @@ public class AdministrarPublicaciones {
 				cuenta++;
 				g = cuenta;
 				actualizo = conexion.actualizarBD("UPDATE repositorio_fotos SET direccion_foto='curso_" + cuenta + ".jpg' WHERE id_foto=" + p.getIdFoto());
+
 			}
 
 		}
@@ -1053,26 +1152,23 @@ public class AdministrarPublicaciones {
 
 			sentencia += " AND c.documento='" + documento + "'";
 		}
-		
-		
+
 		if (nombre != null && !nombre.trim().equals("")) {
 
 			sentencia += " AND UPPER(c.nombre_completo) LIKE '%" + nombre.trim().toUpperCase() + "%'";
 		}
-		
-		
+
 		if (fechaI != null && !fechaI.trim().equals("")) {
 
 			sentencia += " AND c.fecha_inicio >='" + fechaI + "'";
 		}
-		
-		
+
 		if (fechaF != null && !fechaF.trim().equals("")) {
 
 			sentencia += " AND c.fecha_fin <='" + fechaF + "'";
 		}
-		
-		sentencia +=" ORDER BY c.nombre_completo";
+
+		sentencia += " ORDER BY c.nombre_completo";
 
 		ResultSet rs = conexion.consultarBD(sentencia);
 		try {
@@ -1100,8 +1196,6 @@ public class AdministrarPublicaciones {
 		}
 		return certificados;
 	}
-	
-	
 
 	public Certificado getCertificado(int id) {
 		Certificado certificado = null;

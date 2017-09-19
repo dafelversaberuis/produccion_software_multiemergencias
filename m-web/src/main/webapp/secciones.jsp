@@ -339,8 +339,9 @@ Seccion seccion = null;
 	<tr>
 		<td colspan="3"> 
 	<%if(seccion.getDireccionFoto()==null || seccion.getDireccionFoto().trim().equals("") || seccion.getDireccionFoto().trim().equals("null")){ %>
+		<!-- lo quitamos porque no lo usan y por migracion a v3openshift 
 		<a href="#" onclick="buscarFoto(); return false;" style="text-decoration:none">Asociar una imagen a la portada (opcional)</a> 
-		
+		-->
 		<%} %>
 		
 		</td>
@@ -351,9 +352,9 @@ Seccion seccion = null;
 	<tr>
 		<td align="left" colspan="6"><span id="detalleFoto1">
 			<%if(seccion.getDireccionFoto()!=null && !seccion.getDireccionFoto().trim().equals("") && !seccion.getDireccionFoto().trim().equals("null")){ %>
-		
+		<!-- lo quitamos porque no lo usan y por migracion a v3openshift 
 		<img src='/m-web/images/publicaciones/<%=seccion.getDireccionFoto() %>' width='317' height='187' />
-	
+	-->
 		<%} %>
 		
 		
@@ -364,8 +365,9 @@ Seccion seccion = null;
 		<td align="left"><span id="detalleFoto2">
 		
 		<%if(seccion.getDireccionFoto()!=null && !seccion.getDireccionFoto().trim().equals("") && !seccion.getDireccionFoto().trim().equals("null")){ %>
+	<!-- lo quitamos porque no lo usan y por migracion a v3openshift 
 		<a class='current' href='#' onclick='removerFoto(); return false;'>(Remover imagen)</a><br>
-		
+		-->
 		<%} %>
 		</span></td>
 		<td colspan="5" align="left"><span id="detalleGuardar"></span></td>

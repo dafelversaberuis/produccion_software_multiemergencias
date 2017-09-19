@@ -297,8 +297,27 @@ alert('Información enviada con éxito');
 	%>
 				<%
 	if(fotos!=null && fotos.size()>0){ for(RepositorioFotos r: fotos){%>
-				<div class="panel"><img src="imagenes/cursos/<%=r.getDireccionFoto().trim() %>?rf=<%=Math.random()%>" alt="Multiemergencias"/></div>
-	
+			
+		
+		<%if(r.getArchivo()!=null){
+			String directorio_ruta = application.getRealPath("imagenes")+"/cursos/";
+			bAdministrarPublicaciones.guardarArchivoDisco(directorio_ruta+r.getDireccionFoto(), r.getArchivo());
+		%>
+		<div class="panel">
+			<img src="/m-web/ver_archivo_adjunto.jsp?id=<%=r.getIdFoto() %>" alt="Multiemergencias">
+		</div>
+		
+		<%}else{
+		if(r.getDireccionFoto()!=null){
+		%>
+		<div class="panel">
+			<img src="imagenes/cursos/<%=r.getDireccionFoto().trim() %>?rf=<%=Math.random()%>" alt="Multiemergencias"/>
+		</div>
+		<%}} %>
+		
+		
+		
+		
 	
 	<%}} %>
 			
@@ -728,12 +747,40 @@ if(secciones!=null && secciones.size()>0){
 	if(fotos!=null && fotos.size()>0){ for(RepositorioFotos r: fotos){%>
 	
 	 <li class="mix all food vimeo mix_all">
-	     <div class="view3 third-effect3"><img src="imagenes/cursos/<%=r.getDireccionFoto().trim() %>?rf=<%=Math.random()%>" alt="">
-			<div class="mask"><a href="imagenes/cursos/<%=r.getDireccionFoto().trim() %>?rf=<%=Math.random()%>"  data-rel="prettyPhoto[gallery2]" class="viewDetail lightbox info">
+	     <div class="view3 third-effect3">
+	     <%
+	     if(r.getArchivo()!=null){
+	    	 //ya se creo el archivo lo leemos
+	    	 %>
+	    	 <img src="/m-web/ver_archivo_adjunto.jsp?id=<%=r.getIdFoto() %>" alt="Multiemegergencias">
+	    	 <%
+	     }else{
+	    	 if(r.getDireccionFoto()!=null){
+	     %>
+	     <img src="imagenes/cursos/<%=r.getDireccionFoto().trim() %>?rf=<%=Math.random()%>" alt="">
+	     <%}}%>
+	     
+			<div class="mask">
+			 <%
+	     if(r.getArchivo()!=null){%>
+	    	 <a href="/m-web/ver_archivo_adjunto.jsp?id=<%=r.getIdFoto() %>"  data-rel="prettyPhoto[gallery2]" class="viewDetail lightbox info">
+         <div class="project-overlay">
+       	<h3>Multiemergencias</h3>
+	  	<span class="project-name">Fotos</span>          </div>
+         </a> 
+         
+	    	 <%
+	    	 
+	     }else{
+	    	 if(r.getDireccionFoto()!=null){
+	    	 %>
+			<a href="imagenes/cursos/<%=r.getDireccionFoto().trim() %>?rf=<%=Math.random()%>"  data-rel="prettyPhoto[gallery2]" class="viewDetail lightbox info">
             <div class="project-overlay">
           	<h3>Multiemergencias</h3>
 		  	<span class="project-name">Fotos</span>          </div>
-            </a>            </div>
+            </a> 
+            <%}} %>
+                       </div>
 	     </div>
      </li>
      

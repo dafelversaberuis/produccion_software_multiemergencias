@@ -194,7 +194,31 @@ function recargar(){
     for(RepositorioFotos l: fotos){
     	%>	
 							<li style="float: left; list-style: none; position: relative; width: 1140px;" class="bx-clone">
+							
+							<%
+							
+							if(l.getArchivo()!=null){
+								String directorio_ruta = application.getRealPath("imagenes")+"/cursos/";
+								bAdministrarPublicaciones.guardarArchivoDisco(directorio_ruta+l.getDireccionFoto(), l.getArchivo());
+							
+							
+							%>
+							   
+							<img src="/m-web/ver_archivo_adjunto.jsp?id=<%=l.getIdFoto() %>" alt="Multiemegergencias">
+							
+							<%
+							
+							
+							}else{
+								if(l.getDireccionFoto()!=null){
+							%>
+							
     								<img src="/m-web/imagenes/cursos/<%=l.getDireccionFoto() %>?rf=<%=Math.random()%>" alt="Multiemegergencias">
+    							
+    							<%   
+								}
+							}
+    							%>
     							</li>
     							
     					<%

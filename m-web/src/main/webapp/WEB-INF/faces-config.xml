@@ -5,9 +5,9 @@
 	version="2.2">
 
 
-	
+
 	<navigation-rule>
-		<from-view-id/>
-    </navigation-rule>
+		<from-view-id />
+	</navigation-rule>
 
 </faces-config>

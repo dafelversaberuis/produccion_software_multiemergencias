@@ -92,8 +92,18 @@ eliminar(Clic en la foto que desea eliminar):</strong><br />
 		%>    
 		<td><a href="#"
 			onClick="borrar('<%=l.getIdFoto()%>','<%=l.getDireccionFoto()%>'); return false;">
-		<img src="imagenes/cursos/<%=l.getDireccionFoto()%>?re=<%=Math.random()%>"
-			width="72" height="72" alt="" /></a><br />
+			
+			<% if(l.getArchivo()!=null){ %>  
+			
+		<img src="/m-web/ver_archivo_adjunto.jsp?id=<%=l.getIdFoto() %>"
+			width="72" height="72" alt="" />
+			
+			<%}else{ %>
+			<img src="imagenes/cursos/<%=l.getDireccionFoto()%>?re=<%=Math.random()%>"
+			width="72" height="72" alt="" />
+			<%} %>
+			
+			</a><br />
 		</td>
 		<%
 			}

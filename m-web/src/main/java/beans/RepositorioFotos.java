@@ -1,13 +1,16 @@
 package beans;
 
 public class RepositorioFotos {
-  
+
 	private int			idFoto;
 	private String	fechaPublicacion;
 	private String	direccionFoto;
 	private int			idEgresado;
 	private int			idAdministrador;
 	private String	nombre;
+	private String	contentType;
+
+	private byte[]	archivo;
 
 	public RepositorioFotos() {
 
@@ -59,6 +62,22 @@ public class RepositorioFotos {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public byte[] getArchivo() {
+		return archivo;
+	}
+
+	public void setArchivo(byte[] archivo) {
+		this.archivo = archivo;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 }

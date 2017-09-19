@@ -85,11 +85,16 @@
 								if (i == nombres.length - 1) {
 									if (sizeInBytes <= tamano_maximo_archivo) {
 										
-										int ultima = bAdministrarPublicaciones.guardarRepositorio(tu, us, solonombrearchivo);
 										
+										int ultima = bAdministrarPublicaciones.guardarRepositorio(tu, us, solonombrearchivo, contentType);
 										File uploadedFile = new File(directorio_ruta + "curso_"+ultima+".jpg");
 										item2.write(uploadedFile);
-										guardo = 1;   
+										
+										
+										guardo = 1;
+										
+										bAdministrarPublicaciones.actualizarArchivo(new File(directorio_ruta + "curso_"+ultima+".jpg"));
+										
 
 
 %>

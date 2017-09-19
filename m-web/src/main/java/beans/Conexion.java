@@ -1,5 +1,7 @@
 package beans;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,39 +13,35 @@ public class Conexion {
 
 	// Configuracion de la conexion a la base de datos
 
-	private String						DB_driver	= ""; 
+	private String						DB_driver	= "";
 	private String						url				= "";
 	private String						username	= "";
 	private String						password	= "";
 	public Connection					con				= null;
 	private Statement					stmt			= null;
 	private PreparedStatement	pstmt			= null;
-	private ResultSet					rs				= null; 
+	private ResultSet					rs				= null;
 
 	private String						query			= null;
 
 	Conexion() {
 
 		DB_driver = "com.mysql.jdbc.Driver";
-	
-		//local
-//		url = "jdbc:mysql://localhost:3306/produccion_multiemergencias";
-//		username = "root";
-//		password = "12345678";
-//		
-		//openshift v2
-//		url = "jdbc:mysql://127.2.5.2:3306/multiemergencias";
-//		username = "adminu82AwDA";
-//		password = "iYula1mwC8BU";
-		
-		
-		//openshift v3 
-		url = "jdbc:mysql://mysql:3306/produccion_multiemergencias";
-		username = "dannypipe_multiemergencias";
-		password = "meli0523_multiemergencias";
-		
-		
 
+		// local
+		url = "jdbc:mysql://localhost:3306/produccion_multiemergencias";
+		username = "root";
+		password = "12345678";
+
+		// openshift v2
+		// url = "jdbc:mysql://127.2.5.2:3306/multiemergencias";
+		// username = "adminu82AwDA";
+		// password = "iYula1mwC8BU";
+
+		// openshift v3
+		// url = "jdbc:mysql://mysql:3306/produccion_multiemergencias";
+		// username = "dannypipe_multiemergencias";
+		// password = "meli0523_multiemergencias";
 
 		try {
 			Class.forName(DB_driver);
@@ -56,7 +54,7 @@ public class Conexion {
 			con.setTransactionIsolation(8);
 
 		} catch (Exception ex) {
-			//ex.printStackTrace();
+			// ex.printStackTrace();
 		}
 
 	}
@@ -72,13 +70,13 @@ public class Conexion {
 		try {
 			Class.forName(DB_driver);
 		} catch (ClassNotFoundException cnfx) {
-			//System.out.println("No se pudo cargar el Driver Correctamente!");
+			// System.out.println("No se pudo cargar el Driver Correctamente!");
 		}
 		// Realizar la conexin
 		try {
 			con = DriverManager.getConnection(url, username, password);
 		} catch (Exception ex) {
-			//ex.printStackTrace();
+			// ex.printStackTrace();
 		}
 	}
 
@@ -95,7 +93,7 @@ public class Conexion {
 				// //System.out.println("cerró correctamente");
 			}
 		} catch (Exception ex) {
-			//ex.printStackTrace();
+			// ex.printStackTrace();
 		}
 	}
 
@@ -105,11 +103,11 @@ public class Conexion {
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = stmt.executeQuery(sentencia);
 		} catch (SQLException sqlex) {
-			//sqlex.printStackTrace();
+			// sqlex.printStackTrace();
 		} catch (RuntimeException rex) {
-			//rex.printStackTrace();
+			// rex.printStackTrace();
 		} catch (Exception ex) {
-			//ex.printStackTrace();
+			// ex.printStackTrace();
 		}
 
 		return rs;
@@ -129,7 +127,8 @@ public class Conexion {
 				posic = sentencia.indexOf("?", posic + 1);
 				n = sentencia.indexOf("LIKE", posic - 6);// Revisa si el operador es
 				// like
-				// //System.out.println("posic="+posic+"  n="+n+" condicin: "+condiciones[i]);
+				// //System.out.println("posic="+posic+" n="+n+" condicin:
+				// "+condiciones[i]);
 				if ((n < posic) && (n != -1)) {// ac es un 'like'
 					pstmt.setString(i + 1, "%" + condiciones[i] + "%");
 				} else {// ac es un '='
@@ -138,11 +137,11 @@ public class Conexion {
 			}
 			rs = pstmt.executeQuery();
 		} catch (SQLException sqlex) {
-			//sqlex.printStackTrace();
+			// sqlex.printStackTrace();
 		} catch (RuntimeException rex) {
-			//rex.printStackTrace();
+			// rex.printStackTrace();
 		} catch (Exception ex) {
-			//ex.printStackTrace();
+			// ex.printStackTrace();
 		}
 		return rs;
 	}
@@ -153,13 +152,13 @@ public class Conexion {
 			stmt = con.createStatement();
 			stmt.execute(sentencia);
 		} catch (SQLException sqlex) {
-			//System.out.println("ERROR RUTINA: " + sqlex);
+			// System.out.println("ERROR RUTINA: " + sqlex);
 			return false;
 		} catch (RuntimeException rex) {
-			//System.out.println("ERROR RUTINA: " + rex);
+			// System.out.println("ERROR RUTINA: " + rex);
 			return false;
 		} catch (Exception ex) {
-			//System.out.println("EXCEPCION: " + ex);
+			// System.out.println("EXCEPCION: " + ex);
 			return false;
 		}
 		return true;
@@ -196,13 +195,13 @@ public class Conexion {
 			}
 			pstmt.executeUpdate();
 		} catch (SQLException sqlex) {
-			//System.out.println("ERROR RUTINA: " + sqlex);
+			// System.out.println("ERROR RUTINA: " + sqlex);
 			return false;
 		} catch (RuntimeException rex) {
-			//System.out.println("ERROR RUTINA: " + rex);
+			// System.out.println("ERROR RUTINA: " + rex);
 			return false;
 		} catch (Exception ex) {
-			//System.out.println("EXCEPCION: " + ex);
+			// System.out.println("EXCEPCION: " + ex);
 			return false;
 		}
 		return true;
@@ -245,13 +244,13 @@ public class Conexion {
 			}
 			n = pstmt.executeUpdate();
 		} catch (SQLException sqlex) {
-			//System.out.println("ERROR RUTINA: " + sqlex.getMessage());
+			// System.out.println("ERROR RUTINA: " + sqlex.getMessage());
 			return false;
 		} catch (RuntimeException rex) {
-			//System.out.println("ERROR RUTINA: " + rex.getMessage());
+			// System.out.println("ERROR RUTINA: " + rex.getMessage());
 			return false;
 		} catch (Exception ex) {
-			//System.out.println("EXCEPCION: " + ex.getMessage());
+			// System.out.println("EXCEPCION: " + ex.getMessage());
 			return false;
 		}
 		return true;
@@ -262,13 +261,59 @@ public class Conexion {
 			stmt = con.createStatement();
 			stmt.executeUpdate(sentencia);
 		} catch (SQLException sqlex) {
-			//System.out.println("ERROR RUTINA: " + sqlex);
+			// System.out.println("ERROR RUTINA: " + sqlex);
 			return false;
 		} catch (RuntimeException rex) {
-			//System.out.println("ERROR RUTINA: " + rex);
+			// System.out.println("ERROR RUTINA: " + rex);
 			return false;
 		} catch (Exception ex) {
-			//System.out.println("EXCEPCION: " + ex);
+			// System.out.println("EXCEPCION: " + ex);
+			return false;
+		}
+		return true;
+	}
+
+	public boolean actualizarBD3(String tabla, String[] campos, String[][] condiciones, FileInputStream is, int longitud, File fBlob) {
+
+		String sentencia = new String();
+		StringBuffer buffer = new StringBuffer();
+		int numParam = 1;
+		pstmt = null;
+		buffer.append("UPDATE " + tabla + " SET ");
+		for (int i = 0; i <= numParam - 1; i++) {
+			if (i == 0) {
+				buffer.append(campos[i] + "=?");
+			} else {
+				buffer.append("," + campos[i] + "=?");
+			}
+		}
+		numParam = condiciones.length;
+		for (int j = 0; j <= numParam - 1; j++) {
+			if (j == 0) {
+				buffer.append(" WHERE " + condiciones[j][0] + " = '" + condiciones[j][1] + "'");
+
+			} else {
+				buffer.append(" AND " + condiciones[j][0] + " = '" + condiciones[j][1] + "'");
+			}
+		}
+		sentencia = buffer.toString();
+
+		try {
+			pstmt = con.prepareStatement(sentencia);
+
+			pstmt.setBinaryStream(1, is, (int) fBlob.length());
+
+			if (pstmt.executeUpdate() == 0) {
+				return false;
+			}
+		} catch (SQLException sqlex) {
+			// System.out.println("ERROR RUTINA: " + sqlex);
+			return false;
+		} catch (RuntimeException rex) {
+			// System.out.println("ERROR RUTINA: " + rex);
+			return false;
+		} catch (Exception ex) {
+			// System.out.println("EXCEPCION: " + ex);
 			return false;
 		}
 		return true;
@@ -298,7 +343,7 @@ public class Conexion {
 			}
 		}
 		sentencia = buffer.toString();
-		//System.out.println(sentencia);
+		// System.out.println(sentencia);
 		numParam = valores.length;
 		try {
 			pstmt = con.prepareStatement(sentencia);
@@ -314,19 +359,21 @@ public class Conexion {
 					pstmt.setInt(j + 1, IntegerParam.intValue());
 				} else if (valores[j].getClass().getName().equals("java.lang.Long")) {
 					pstmt.setLong(j + 1, ((Long) valores[j]).longValue());
+				} else {
+					pstmt.setObject(j + 1, valores[j]);
 				}
 			}
 			if (pstmt.executeUpdate() == 0) {
 				return false;
 			}
 		} catch (SQLException sqlex) {
-			//System.out.println("ERROR RUTINA: " + sqlex);
+			// System.out.println("ERROR RUTINA: " + sqlex);
 			return false;
 		} catch (RuntimeException rex) {
-			//System.out.println("ERROR RUTINA: " + rex);
+			// System.out.println("ERROR RUTINA: " + rex);
 			return false;
 		} catch (Exception ex) {
-			//System.out.println("EXCEPCION: " + ex);
+			// System.out.println("EXCEPCION: " + ex);
 			return false;
 		}
 		return true;
@@ -337,13 +384,13 @@ public class Conexion {
 			stmt = con.createStatement();
 			stmt.execute(sentencia);
 		} catch (SQLException sqlex) {
-			//System.out.println("ERROR RUTINA: " + sqlex);
+			// System.out.println("ERROR RUTINA: " + sqlex);
 			return false;
 		} catch (RuntimeException rex) {
-			//System.out.println("ERROR RUTINA: " + rex);
+			// System.out.println("ERROR RUTINA: " + rex);
 			return false;
 		} catch (Exception ex) {
-			//System.out.println("EXCEPCION: " + ex);
+			// System.out.println("EXCEPCION: " + ex);
 			return false;
 		}
 		return true;
@@ -353,7 +400,8 @@ public class Conexion {
 		try {
 			con.setAutoCommit(parametro);
 		} catch (SQLException sqlex) {
-			//System.out.println("Error al configurar el autoCommit " + sqlex.getMessage());
+			// System.out.println("Error al configurar el autoCommit " +
+			// sqlex.getMessage());
 			return false;
 		}
 		return true;
@@ -368,7 +416,7 @@ public class Conexion {
 			con.commit();
 			return true;
 		} catch (SQLException sqlex) {
-			//System.out.println("Error al hacer commit " + sqlex.getMessage());
+			// System.out.println("Error al hacer commit " + sqlex.getMessage());
 			return false;
 		}
 	}
@@ -378,7 +426,7 @@ public class Conexion {
 			con.rollback();
 			return true;
 		} catch (SQLException sqlex) {
-			//System.out.println("Error al hacer rollback " + sqlex.getMessage());
+			// System.out.println("Error al hacer rollback " + sqlex.getMessage());
 			return false;
 		}
 	}
@@ -388,10 +436,10 @@ public class Conexion {
 		ResultSet rs = BD.consultarBD("SELECT * FROM administradores");
 		try {
 			while (rs.next()) {
-				//System.out.println(rs.getString(2));
+				// System.out.println(rs.getString(2));
 			}
 		} catch (Exception E) {
-			//System.out.println(E.getMessage());
+			// System.out.println(E.getMessage());
 		}
 
 	}
