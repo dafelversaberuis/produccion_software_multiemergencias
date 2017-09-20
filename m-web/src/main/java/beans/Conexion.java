@@ -39,9 +39,9 @@ public class Conexion {
 		// password = "iYula1mwC8BU";
 
 		// openshift v3
-		 url = "jdbc:mysql://mysql:3306/produccion_multiemergencias";
-		 username = "dannypipe_multiemergencias";
-		 password = "meli0523_multiemergencias";
+		 url = "jdbc:mysql://mysql:3306/produccion";
+		 username = "dannypipe";
+		 password = "meli0523";
 
 		try {
 			Class.forName(DB_driver);

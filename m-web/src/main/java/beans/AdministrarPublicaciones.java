@@ -592,7 +592,7 @@ public class AdministrarPublicaciones {
 			valores[0] = array;
 			boolean oka = conexion.actualizarBD3("repositorio_fotos", campos, condiciones, is, (int) archivo.length(), archivo);
 			// revisa
-			System.out.println(oka);
+			//System.out.println(oka);
 
 			conexion.cerrarConexion();
 
