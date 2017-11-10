@@ -198,6 +198,7 @@ function recargar(){
 							<%
 							
 							if(l.getArchivo()!=null){
+								
 								String directorio_ruta = application.getRealPath("imagenes")+"/cursos/";
 								bAdministrarPublicaciones.guardarArchivoDisco(directorio_ruta+l.getDireccionFoto(), l.getArchivo());
 							
