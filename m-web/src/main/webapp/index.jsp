@@ -9,9 +9,10 @@
 <%@page import="beans.RepositorioFotos"%>	
 <html>
 <head>
-    <title>MULTIEMERGENCIAS S.A.S</title>
+    <title>CURSOS BLS, ACLS, PRIMEROS AUXILIOS. MULTIEMERGENCIAS BUCARAMANGA</title><link rel="icon" type="image/gif" href="/imagenes/favicon_multiemergencias.gif" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="Description" content="CENTRO DE ENTRENAMIENTO EN EMERGENCIAS y SALUD OCUPACIONAL ">
+<meta name="description" content="Cursos de Soporte Vital Básico y Avanzado. Formación para personal del area de la salud en Santander "/>
+<meta name="keywords" content="cursos bls, cursos acls, cursos de primeros auxilios, cursos toma de muestras de laboratorios, toma de citologias, curso atención integral a victimas de violencia sexual, Cursos salud bucaramanga, capacitación en salud santander "/>
    <meta charset="utf-8">
 	 <!-- librerias  -->
 	<link rel="stylesheet" href="assets/css/bootstrap.css" type="text/css"/>
@@ -88,6 +89,68 @@ function fMenu()
 		}
 		
 	}
+</script>
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+ fbq('init', '2135401846746027'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+ <img height="1" width="1" 
+src="https://www.facebook.com/tr?id=2135401846746027&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118142515-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118142515-1');
+</script>
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+ fbq('init', '2135401846746027'); 
+fbq('track', 'PageView');
+</script>
+<noscript>
+ <img height="1" width="1" 
+src="https://www.facebook.com/tr?id=2135401846746027&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118142515-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-118142515-1');
 </script>
 </head>
 <body>
@@ -249,7 +312,7 @@ alert('Información enviada con éxito');
 					<div class="home_address">
 						<img src="img/logo.png" width="40%" height="40%">
 					</div>
-					<i class="fa fa-whatsapp"></i>316 629 27 91<br/><i class="fa fa-phone"></i>&nbsp;322 726 97 09</div>
+					<i class="fa fa-whatsapp"></i> 316 629 27 91<br/></div>
 			</div>
 <!-- Mainheader Menu Section -->
 <script type="text/javascript">if(typeof wabtn4fg==="undefined"){wabtn4fg=1;h=document.head||document.getElementsByTagName("head")[0],s=document.createElement("script");s.type="text/javascript";s.src="//whatsapp-sharing.com/button";h.appendChild(s);}</script>	
@@ -419,7 +482,7 @@ if(secciones!=null && secciones.size()>0){
 =============================--> 
 
 <div id="portafolio" class="item">
-			<img src="assets/img/me10.jpg" alt="The Spice Lounge" class="fullBg">
+			<img src="images/publicaciones/portafolio.jpg" alt="The Spice Lounge" class="fullBg">
 			<div class="content">
                              
 				<div class="content_overlay"></div>
@@ -481,7 +544,7 @@ if(secciones!=null && secciones.size()>0){
 =============================--> 
 
 <div id="tratamiento" class="item">
-			<img src="assets/img/me7.jpg" alt="The Spice Lounge" class="fullBg">
+			<img src="images/publicaciones/tratamiento_datos.jpg" alt="The Spice Lounge" class="fullBg">
 			<div class="content">
                              
 				<div class="content_overlay"></div>
@@ -814,7 +877,7 @@ if(secciones!=null && secciones.size()>0){
 =============================-->
 
 <div id="certificado" class="item three_fourth">
-				<img src="assets/img/me18.jpg" alt="The Spice Lounge" class="fullBg">
+				<img src="images/publicaciones/certificado.jpg" alt="The Spice Lounge" class="fullBg">
 				<div class="content">
 					<div class="content_overlay_three_fourth"></div>
                         <div class="content_inner">
@@ -878,7 +941,7 @@ if(secciones!=null && secciones.size()>0){
 			<p>Puedes comunicarte con nosotros para lo que desees(Con nuestros datos o redes sociales) ó escribe en el formulario y te responderemos enseguida:</p>
 			<div class="clearfix pad_top20">
 					<h2 class="clearfix address">
-				<div class="phone"><i class="fa fa-phone"></i>&nbsp;&nbsp;+ 57 6316 629 2791</div>
+				<div class="phone"><i class="fa fa-phone"></i>&nbsp;&nbsp;+ 57 316 629 2791</div>
 				
 					<i class="fa fa-envelope"></i> multiemergenciassas@gmail.com
 				<div class="clearfix">
