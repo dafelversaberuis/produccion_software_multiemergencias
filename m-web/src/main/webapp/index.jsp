@@ -299,10 +299,10 @@ alert('Información enviada con éxito');
 				<div class="container">
 					<div class="header_icons accura-header-block accura-hidden-2xs">
 						<ul class="accura-social-icons accura-stacked accura-jump accura-full-height accura-bordered accura-small accura-colored-bg clearFix">
-						<li id="1"><a href="https://www.facebook.com/muliemergencias.centrodeentrenamiento" target="_blank" class="accura-social-icon-facebook circle"><i class="fa fa-facebook"></i></a></li>
-					    <li id="2"><a href="http://www.twitter.com/" target="_blank" class="accura-social-icon-twitter circle"><i class="fa fa-twitter"></i></a></li>
+						<li id="1"><a href="https://web.facebook.com/multiemergencias.centrodeentrenamiento/" target="_blank" class="accura-social-icon-facebook circle"><i class="fa fa-facebook"></i></a></li>
+					    <li id="2"><a href="https://twitter.com/multiemergencia" target="_blank" class="accura-social-icon-twitter circle"><i class="fa fa-twitter"></i></a></li>
                         <li id="3"><a data-href="" data-text="Multiemergencias" href="whatsapp://send" target="_blank" class="accura-social-icon-linkedin circle"><i class="fa fa-whatsapp"></i></a></li>
-                        <li id="4"><a href="#" target="_blank" class="accura-social-icon-pinterest circle" onclick="return false;"><i class="fa fa-instagram"></i></a></li>
+                        <li id="4"><a href="https://www.instagram.com/multiemergencias/" target="_blank" class="accura-social-icon-pinterest circle" onclick="return false;"><i class="fa fa-instagram"></i></a></li>
 					    <li id="5"><a href="https://mail.zoho.com/biz/customlogin?rd=multiemergencias.com" target="_blank" class="accura-social-icon-facebook circle"><i class="fa fa-paper-plane"></i></a></li>
 					   
 						

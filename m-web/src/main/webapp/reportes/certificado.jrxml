@@ -13,6 +13,7 @@
 	<parameter name="pLeyenda" class="java.lang.String"/>
 	<parameter name="pId" class="java.lang.String"/>
 	<parameter name="pLogoSocio" class="java.lang.String"/>
+	<parameter name="pQR" class="java.lang.String"/>
 	<background>
 		<band height="572" splitType="Stretch">
 			<image onErrorType="Icon">
@@ -80,20 +81,23 @@
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{pLeyenda}]]></textFieldExpression>
 			</textField>
-			<image onErrorType="Blank">
-				<reportElement x="532" y="90" width="162" height="95">
-					<printWhenExpression><![CDATA[1==2 && $P{pLogoSocio}!=null]]></printWhenExpression>
-				</reportElement>
-				<imageExpression class="java.lang.String"><![CDATA[$P{pLogoSocio}]]></imageExpression>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="555" y="93" width="76" height="70"/>
+				<imageExpression class="java.awt.Image"><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(new com.google.zxing.qrcode.QRCodeWriter().encode("http://www.multiemergencias.com/m-web/imprimir_certificado.jsp?rf="+Math.random()+"&i="+$P{pId}+"&j="+Math.random(), com.google.zxing.BarcodeFormat.QR_CODE, 1000, 1000))]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="0" y="390" width="752" height="20">
-					<printWhenExpression><![CDATA[1==2]]></printWhenExpression>
-				</reportElement>
+				<reportElement x="0" y="390" width="752" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font size="9"/>
 				</textElement>
-				<text><![CDATA[Licencia 1945 de 09/09/2013 Secretaria de Educación]]></text>
+				<text><![CDATA[Artículo 2.6.6.8 de Decreto Único Reglamento del Sector Educación 1075 de 26 de mayo de 2015]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="552" y="152" width="86" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="6"/>
+				</textElement>
+				<text><![CDATA[Escanee QR]]></text>
 			</staticText>
 		</band>
 	</title>
